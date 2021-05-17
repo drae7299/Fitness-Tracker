@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const seeder = require('mongoose-seeder');
-data = require('./config/data.json');
+
 
 const PORT = process.env.PORT || 3000
 
