@@ -9,6 +9,10 @@ router.get("/", (req, res) => {
 });
 
 
+router.get('/stats',(req, res) => {
+      console.log('Route matched')
+      res.sendFile(path.join(__dirname,"../public/stats.html"))
+});
 
 
 
