@@ -30,7 +30,7 @@ const workoutSchema = new Schema({
             sets: {
                 type: Number
             },
-            distnce: {
+            distance: {
                 type: Number
             }
 
@@ -39,6 +39,6 @@ const workoutSchema = new Schema({
 });
 
 
-const Workout = mongoose.model('Workout', workoutSchema);
+const Workout = mongoose.model('workout', workoutSchema);
 
 module.exports = Workout;
