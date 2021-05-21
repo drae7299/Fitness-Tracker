@@ -14,7 +14,11 @@ router.get('/api/workouts/range' , (req, res) => {
 
 
 // add an exercise put into workouts
-router.put()
+router.put("/workouts/: id" ,({params, body}, res) => {
+    console.log(body);
+
+
+}) ;
 
 
 
