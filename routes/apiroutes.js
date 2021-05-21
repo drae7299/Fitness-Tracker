@@ -13,5 +13,14 @@ router.get('/api/workouts/range' , (req, res) => {
 }) ;
 
 
+// add an exercise put into workouts
+router.put()
+
+
+
+// create a workout 
+
+
+
 
 module.exports = router
