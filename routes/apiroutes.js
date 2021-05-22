@@ -4,7 +4,7 @@ const router = require('express').Router();
 // const router = require('module').Router();
 
 //route for workout tab
-router.get('/api/workouts' , (req, res) => {
+router.get('/api/workouts' , (params, res) => {
     console.log('Its working');
     Workout.find({})
         .then(dbWorkout => {
@@ -22,32 +22,11 @@ router.get('/api/workouts/range' , (req, res) => {
 
 
 // add an exercise put into workouts
-router.put("api/workouts/: id" ,({params, body } , res) => {
-        console.log(body);
-        Workout.findByIdAndUpdate(
-            params.id,
-            {
-                $push: {
-                    exercise: body,
-                },
-            },
-            {
-                new: true,
-                runValidators: true
-            }
-        )
-            .then(dbWorkout => {
-                res.json(dbWorkout);
-            })
-            .catch(err => {
-                res.json(err);
-            })
-});
-
+router.put("/api/workouts/: id" ,({params, body } , res) => {
 
 
 // create a workout 
-router.put( "/workouts" , ({body} , res) => {
+router.post( "/api/workouts" , ({body} , res) => {
     console.log(body);
     Workout.create({})
         .then(dbWorkout => {
