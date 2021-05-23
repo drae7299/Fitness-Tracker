@@ -4,28 +4,41 @@ const router = require("express").Router();
 // const router = require('module').Router();
 
 //route for workout tab
-router.get("/api/workouts", (params, res) => {
-  console.log("Its working");
-  Workout.find({})
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
+router.get('/api/workouts', (data, res) => {
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: { $sum: '$exercises.duration' }
+      }
+    }
+  ])
+    .limit(7)
+    .then(data => {
+      res.json(data);
     })
-    .catch((err) => {
-      res.json(err);
+    .catch(err => {
+      res.status(400).json(err);
     });
 });
 //route for workout range tab
-router.get("/api/workouts/range", (req, res) => {
-  console.log("Its working");
-  Workout.find({})
+router.get('/api/workouts/range', (data, res) => {
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: { $sum: '$exercises.duration' },
+        totalWeight: { $sum: '$exercises.weight' }
+      }
+    }
+  ])
     .limit(7)
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
+    .then(data => {
+      res.json(data);
     })
-    .catch((err) => {
-      res.json(err);
+    .catch(err => {
+      res.status(400).json(err);
     });
 });
+
 
 // add an exercise put into workouts
 router.put("/api/workouts/:id", (req, res) => {
@@ -43,14 +56,13 @@ router.put("/api/workouts/:id", (req, res) => {
 });
 
 // create a workout
-router.post("/api/workouts", ({ body }, res) => {
-  console.log(body);
-  Workout.create({})
-    .then((dbWorkout) => {
-      res.json(dbWorkout);
+router.post("/api/workouts", (req, res) => {
+  Workout.create(req.body)
+    .then((data) => {
+      res.json(data);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(400).json(err);
     });
 });
 
