@@ -4,7 +4,7 @@ const router = require("express").Router();
 // const router = require('module').Router();
 
 //route for workout tab
-router.get('/api/workouts', (data, res) => {
+router.get('/api/workouts', (req, res) => {
   Workout.aggregate([
     {
       $addFields: {
@@ -21,7 +21,7 @@ router.get('/api/workouts', (data, res) => {
     });
 });
 //route for workout range tab
-router.get('/api/workouts/range', (data, res) => {
+router.get('/api/workouts/range', (req, res) => {
   Workout.aggregate([
     {
       $addFields: {
